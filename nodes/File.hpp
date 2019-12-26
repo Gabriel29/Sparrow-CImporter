@@ -11,6 +11,7 @@
 #include "Union.hpp"
 #include "Fun.hpp"
 #include "FunParam.hpp"
+#include "Typedef.hpp"
 
 #include "../ICimpVisitor.hpp"
 #include "utils.hpp"

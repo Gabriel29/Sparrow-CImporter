@@ -116,8 +116,12 @@ void File::parseDeclarations()
             switch(cursorKind)
             {
             case CXCursor_TypedefDecl:
-                //auto decl = std::make_shared<Decl>(cursor);
+            {
+                auto typedefDecl = std::make_shared<Typedef>(cursor);
+                typedefDecl->parseDecl();
+                f->addDecl(std::static_pointer_cast<Decl>(typedefDecl));
                 break;
+            }
 
             case CXCursor_EnumDecl:
             {

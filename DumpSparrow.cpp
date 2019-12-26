@@ -78,7 +78,9 @@ void DumpSparrow::visit(const EnumDecl& node)
 
 void DumpSparrow::visit(const Typedef& node)
 {
-    // Empty
+    std::cout << "using " << node.getName() << " = ";
+    node.getType()->accept(*this);
+    std::cout << '\n';
 }
 
 void DumpSparrow::visit(const Fun& node)

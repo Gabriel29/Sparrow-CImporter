@@ -3,14 +3,14 @@
 using namespace cimporter;
 
 Typedef::Typedef(CXCursor cursor)
-    : CXBase (cursor)
+    : Decl (cursor)
 {
     _name = getCursorName(cursor);
 }
 
-void Typedef::parseTypedef()
+void Typedef::parseDecl()
 {
-    CXType type = clang_getCursorType(_cursor);
+    CXType type = clang_getTypedefDeclUnderlyingType(_cursor);
     _type = std::make_shared<Type>(type);
     _type->parseType();
 }
