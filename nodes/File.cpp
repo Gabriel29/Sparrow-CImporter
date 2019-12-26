@@ -144,8 +144,12 @@ void File::parseDeclarations()
             }
 
             case CXCursor_FunctionDecl:
-                //auto decl = std::make_shared<Decl>(cursor);
+            {
+                auto fun = std::make_shared<Fun>(cursor);
+                fun->parseDecl();
+                f->addDecl(std::static_pointer_cast<Decl>(fun));
                 break;
+            }
 
             default:
                 break;

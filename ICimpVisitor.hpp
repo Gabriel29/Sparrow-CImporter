@@ -31,7 +31,6 @@ struct ICimpVisitor
     virtual void visit(const Fun&)          = 0;
     virtual void visit(const FunParam&)     = 0;
     virtual void visit(const FunPtr&)       = 0;
-
     virtual void visit(const Type&)     = 0;
 };
 

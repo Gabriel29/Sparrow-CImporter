@@ -9,6 +9,8 @@
 #include "Enum.hpp"
 #include "Struct.hpp"
 #include "Union.hpp"
+#include "Fun.hpp"
+#include "FunParam.hpp"
 
 #include "../ICimpVisitor.hpp"
 #include "utils.hpp"

@@ -17,16 +17,11 @@ class Typedef : CXBase
 public:
 	Typedef(CXCursor cursor);
 
-	void setFunPtrTrue();
-	bool isFunPtr();
-	void addToList(const std::shared_ptr<FunParam> decl);
-    const std::vector<std::shared_ptr<FunParam>>& getParamList() const;
-
+    void parseTypedef();
     void accept(ICimpVisitor& visitor) override { visitor.visit(*this); }
 
 private:
-    bool _isFunctionPointer;
-    std::vector<std::shared_ptr<FunParam>> _paramList;
+    std::shared_ptr<Type> _type;
 };
 
 }

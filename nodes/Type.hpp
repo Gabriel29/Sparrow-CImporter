@@ -26,6 +26,8 @@ private:
 	std::shared_ptr<Type> _child;
     CXType      	_cxType;
     dataType    	_dataType;
+
+public:
     std::string 	_data;
 	unsigned int	_arrayLen;
 

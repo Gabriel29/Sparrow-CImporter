@@ -1,5 +1,5 @@
 #include "Decl.hpp"
-
+#include <iostream>
 using namespace cimporter;
 
 Decl::Decl(CXCursor cursor) 

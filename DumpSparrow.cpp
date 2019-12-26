@@ -83,7 +83,38 @@ void DumpSparrow::visit(const Typedef& node)
 
 void DumpSparrow::visit(const Fun& node)
 {
-    // Empty
+    std::cout << "[native(\"";
+    std::cout << node.getName();
+    std::cout << "\")]" << "\n";
+
+    std::cout << "fun " << node.getName();
+    if(node.getParamList().size() > 0)
+    {
+        bool firstParameter = true;
+        std::cout << "(";
+        
+        for(auto e : node.getParamList())
+        {
+            if(firstParameter == false)
+                std::cout << ", ";
+            
+            std::cout << e->getName() << " : ";
+            e->getType()->accept(*this);
+
+            firstParameter = false;
+        }
+
+        std::cout << ")";
+    }
+
+    auto retType = node.getRetType();
+    if(retType->getType() != cimp_Void)
+    {
+        std::cout << " : ";
+        retType->accept(*this);
+    }
+    
+    std::cout << '\n';
 }
 
 void DumpSparrow::visit(const FunParam& node)
@@ -129,17 +160,16 @@ void DumpSparrow::getSparrowType(const Type& node)
         break;
 
     case cimp_Pointer:
+    case cimp_IncArray:
         std::cout << "Ptr(";
         node.getChild()->accept(*this);
         std::cout << ")";
         break;
 
     case cimp_CtArray:
-        std::cout << "Array";
-        break;
-
-    case cimp_IncArray:
-        std::cout << "Array";
+        std::cout << "StaticArray(";
+        node.getChild()->accept(*this);
+        std::cout << ", " << node._arrayLen << ")";
         break;
 
     case cimp_Void:

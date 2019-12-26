@@ -4,17 +4,20 @@
 #include <memory>
 #include <clang-c/Index.h>
 
-#include "CXBase.hpp"
+#include "Decl.hpp"
 #include "Type.hpp"
 #include "utils.hpp"
 
 namespace cimporter
 {
 
-class FunParam : public CXBase
+class FunParam : public Decl
 {
 public:
 	FunParam(CXCursor cursor);
+
+    void parseDecl() override;
+    std::shared_ptr<Type> getType() const { return _type; }
 
     void SetType(std::shared_ptr<Type> type);
     

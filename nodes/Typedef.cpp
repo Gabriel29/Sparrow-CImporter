@@ -3,27 +3,14 @@
 using namespace cimporter;
 
 Typedef::Typedef(CXCursor cursor)
-    : CXBase (cursor), _isFunctionPointer(false)
+    : CXBase (cursor)
 {
     _name = getCursorName(cursor);
 }
 
-void Typedef::setFunPtrTrue()
+void Typedef::parseTypedef()
 {
-    _isFunctionPointer = true;
-}
-
-bool Typedef::isFunPtr()
-{
-    return _isFunctionPointer;
-}
-
-void Typedef::addToList(const std::shared_ptr<FunParam> decl)
-{
-    _paramList.push_back(decl);
-}
-
-const std::vector<std::shared_ptr<FunParam>>& Typedef::getParamList() const
-{
-    return _paramList;
+    CXType type = clang_getCursorType(_cursor);
+    _type = std::make_shared<Type>(type);
+    _type->parseType();
 }
